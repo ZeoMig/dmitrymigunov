@@ -5,10 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dmitry Migunov — Developer</title>
 <meta name="description" content="Fullstack developer building web products and AI tools. Open to freelance and work.">
+<!-- ⚠️ Замени yourname.dev на реальный домен и добавь og-image.png (1200x630) перед деплоем -->
 <meta property="og:title" content="Dmitry Migunov — Developer">
 <meta property="og:description" content="Fullstack developer building web products and AI tools.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://yourname.dev">
+<meta property="og:url" content="https://zeomig.github.io/dmitrymigunov/">
 <meta property="og:image" content="https://yourname.dev/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Dmitry Migunov — Developer">
@@ -416,17 +417,18 @@ footer{padding:32px 0;border-top:1px solid var(--border);text-align:center;color
             <div class="form-group"><label data-i18n="form.email">Email</label><input type="email" id="femail" placeholder="your@email.com"></div>
             <div class="form-group full"><label data-i18n="form.msg">Message</label><textarea id="fmsg" rows="4" placeholder="What's on your mind?"></textarea></div>
           </div>
-          <button class="form-submit" onclick="submitForm()">
+          <button class="form-submit" id="formSubmitBtn" onclick="submitForm()">
             <span data-i18n="form.send">Send message</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
           </button>
           <div class="form-success" id="formSuccess" data-i18n="form.success">✓ Message sent! I'll get back to you soon.</div>
+          <div class="form-success" id="formError" style="display:none;background:rgba(255,90,90,.1);border-color:rgba(255,90,90,.2);color:#ff7a7a"></div>
         </div>
       </div>
     </section>
 
   </div>
-  <footer><div class="container">Built by Dmitry Migunov · 2026</div></footer>
+  <footer><div class="container">Built by Dmitry Migunov · <span id="footerYear">2026</span></div></footer>
 </div>
 
 <script>
@@ -436,6 +438,9 @@ setTimeout(()=>{
   boot.classList.add('hide');
   setTimeout(()=>{boot.style.display='none';document.getElementById('main').classList.add('show');triggerReveal();},500);
 },2000);
+
+// ── FOOTER YEAR ──
+document.getElementById('footerYear').textContent = new Date().getFullYear();
 
 // ── TYPING ──
 const wordsEN=['Full-stack developer.','AI tools builder.','Web product maker.'];
@@ -453,10 +458,18 @@ tick();
 
 // ── CURSOR LIGHT ──
 const light=document.getElementById('cursorLight');
+let mx=0,my=0,lightQueued=false;
 document.addEventListener('mousemove',e=>{
-  light.style.left=e.clientX+'px';
-  light.style.top=e.clientY+'px';
-});
+  mx=e.clientX;my=e.clientY;
+  if(!lightQueued){
+    lightQueued=true;
+    requestAnimationFrame(()=>{
+      light.style.left=mx+'px';
+      light.style.top=my+'px';
+      lightQueued=false;
+    });
+  }
+},{passive:true});
 
 // ── SCROLL PROGRESS ──
 const prog=document.getElementById('scrollProgress');
@@ -524,17 +537,59 @@ function copyText(e,text){
 }
 
 // ── FORM ──
-function submitForm(){
-  const name=document.getElementById('fname').value.trim();
-  const email=document.getElementById('femail').value.trim();
-  const msg=document.getElementById('fmsg').value.trim();
-  if(!name||!email||!msg){return;}
+// ВАЖНО: замени FORMSPREE_ID на свой ID из formspree.io (например 'xpzgkqyw')
+const FORMSPREE_ID = 'mjgqepdy';
+
+async function submitForm(){
+  const nameEl=document.getElementById('fname');
+  const emailEl=document.getElementById('femail');
+  const msgEl=document.getElementById('fmsg');
+  const btn=document.getElementById('formSubmitBtn');
+  const errEl=document.getElementById('formError');
   const s=document.getElementById('formSuccess');
-  s.style.display='block';
-  document.getElementById('fname').value='';
-  document.getElementById('femail').value='';
-  document.getElementById('fmsg').value='';
-  setTimeout(()=>s.style.display='none',4000);
+
+  const name=nameEl.value.trim();
+  const email=emailEl.value.trim();
+  const msg=msgEl.value.trim();
+
+  errEl.style.display='none';
+  s.style.display='none';
+
+  if(!name||!email||!msg){
+    errEl.textContent='Заполни все поля';
+    errEl.style.display='block';
+    return;
+  }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    errEl.textContent='Проверь email';
+    errEl.style.display='block';
+    return;
+  }
+
+  const originalText=btn.innerHTML;
+  btn.disabled=true;
+  btn.innerHTML='Отправка…';
+
+  try{
+    const res=await fetch(`https://formspree.io/f/${FORMSPREE_ID}`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({name, email, message:msg})
+    });
+    if(res.ok){
+      s.style.display='block';
+      nameEl.value='';emailEl.value='';msgEl.value='';
+      setTimeout(()=>s.style.display='none',5000);
+    } else {
+      throw new Error('Request failed');
+    }
+  } catch(err){
+    errEl.textContent='Не удалось отправить. Напиши напрямую в Telegram или на email.';
+    errEl.style.display='block';
+  } finally {
+    btn.disabled=false;
+    btn.innerHTML=originalText;
+  }
 }
 
 // ── i18n ──
