@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dmitry Migunov — Developer</title>
+<meta name="description" content="Fullstack developer building web products and AI tools. Open to freelance and work.">
+<meta property="og:title" content="Dmitry Migunov — Developer">
+<meta property="og:description" content="Fullstack developer building web products and AI tools.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://yourname.dev">
+<meta property="og:image" content="https://yourname.dev/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Dmitry Migunov — Developer">
+<meta name="twitter:description" content="Fullstack developer building web products and AI tools.">
+<style>
+/* ── VARIABLES ── */
+:root{
+  --bg:#080d1a;--bg2:#0d1322;--bg3:rgba(255,255,255,.02);
+  --border:rgba(255,255,255,.07);--border-hover:rgba(109,131,255,.3);
+  --text:#e8eaf6;--text2:#8891b0;--text3:#5c6480;
+  --accent:#6d83ff;--accent2:#5a72f0;
+  --card-bg:rgba(255,255,255,.02);
+  --nav-bg:rgba(8,13,26,.85);
+  --cursor-color:rgba(109,131,255,.10);
+  --shadow:0 4px 24px rgba(0,0,0,.3);
+  --noise:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+}
+[data-theme="light"]{
+  --bg:#f4f6ff;--bg2:#edf0ff;--bg3:rgba(109,131,255,.04);
+  --border:rgba(109,131,255,.15);--border-hover:rgba(109,131,255,.5);
+  --text:#1a1f36;--text2:#4a5280;--text3:#8891b0;
+  --accent:#4c6ef5;--accent2:#3b5de0;
+  --card-bg:rgba(255,255,255,.85);
+  --nav-bg:rgba(244,246,255,.92);
+  --cursor-color:rgba(109,131,255,.06);
+  --shadow:0 4px 24px rgba(109,131,255,.1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6;transition:background .35s,color .35s}
+body::before{content:'';position:fixed;inset:0;background:var(--noise);pointer-events:none;z-index:0;opacity:.6}
+
+/* ── SCROLL PROGRESS ── */
+#scrollProgress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--accent),#a78bfa);width:0%;z-index:9999;transition:width .1s linear}
+
+/* ── CURSOR LIGHT ── */
+.cursor-light{position:fixed;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,var(--cursor-color),transparent 65%);pointer-events:none;transform:translate(-50%,-50%);transition:left .1s,top .1s;z-index:0}
+
+/* ── BOOT ── */
+#boot{position:fixed;inset:0;background:#060912;display:flex;flex-direction:column;justify-content:center;padding:60px;z-index:9998;transition:opacity .5s}
+#boot.hide{opacity:0;pointer-events:none}
+.boot-line{font-family:'Courier New',monospace;color:#7b8cde;line-height:2;font-size:14px}
+.boot-line .ok{color:#4caf8a;margin-left:12px}
+.bar{width:280px;height:3px;background:#151c33;margin-top:24px;border-radius:99px;overflow:hidden}
+.fill{height:100%;width:0;background:var(--accent);animation:load 1.8s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes load{to{width:100%}}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:flex;justify-content:space-between;align-items:center;background:var(--nav-bg);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);transition:background .35s}
+.nav-logo{font-weight:700;font-size:16px;color:var(--text);letter-spacing:-.3px}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:var(--text2);font-size:14px;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.lang-btn{font-size:13px;color:var(--text2);background:transparent;border:1px solid var(--border);padding:4px 10px;border-radius:6px;cursor:pointer;font-family:inherit;transition:.2s}
+.lang-btn:hover{border-color:var(--border-hover);color:var(--text)}
+.theme-btn{width:36px;height:20px;border-radius:99px;border:1.5px solid var(--border);background:var(--bg3);cursor:pointer;position:relative;transition:.3s;flex-shrink:0}
+.theme-btn::after{content:'';position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:50%;background:var(--accent);transition:transform .3s}
+[data-theme="light"] .theme-btn::after{transform:translateX(16px)}
+
+/* ── BACK TO TOP ── */
+#backTop{position:fixed;bottom:32px;right:32px;width:44px;height:44px;border-radius:12px;background:var(--accent);border:none;color:#fff;font-size:18px;cursor:pointer;z-index:200;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(109,131,255,.3);opacity:0;transform:translateY(12px);transition:.3s;pointer-events:none}
+#backTop.show{opacity:1;transform:none;pointer-events:all}
+#backTop:hover{background:var(--accent2);transform:translateY(-2px)}
+
+/* ── MAIN ── */
+.main{opacity:0;transition:opacity .8s;position:relative;z-index:1}
+.main.show{opacity:1}
+.container{max-width:1060px;margin:auto;padding:0 48px}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s,transform .65s}
+.reveal.visible{opacity:1;transform:none}
+.reveal-delay-1{transition-delay:.1s}.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}.reveal-delay-4{transition-delay:.4s}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:80px;position:relative;z-index:1}
+/* Grid overlay */
+.hero::after{content:'';position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black,transparent);pointer-events:none;opacity:.5;z-index:0}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border:1px solid rgba(109,131,255,.3);border-radius:99px;font-size:13px;color:#8ea2ff;margin-bottom:28px}
+.hero-badge span{width:7px;height:7px;border-radius:50%;background:var(--accent);display:inline-block;animation:badgePulse 2s ease-in-out infinite}
+@keyframes badgePulse{0%,100%{box-shadow:0 0 0 0 rgba(109,131,255,.5)}50%{box-shadow:0 0 0 6px rgba(109,131,255,0)}}
+h1{font-size:clamp(44px,7vw,80px);line-height:1.05;font-weight:700;letter-spacing:-2px}
+h1 .accent{color:var(--accent)}
+.type-wrap{height:36px;margin-top:16px;overflow:hidden}
+.type{font-size:20px;color:var(--text2)}
+.hero-desc{font-size:17px;color:var(--text2);margin-top:20px;max-width:580px;line-height:1.7}
+.btns{margin-top:36px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{padding:13px 24px;border-radius:10px;font-size:15px;font-weight:500;transition:.2s;display:inline-flex;align-items:center;gap:8px;cursor:pointer;text-decoration:none}
+.btn-primary{background:var(--accent);color:#fff;border:1px solid var(--accent)}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-1px);box-shadow:0 8px 24px rgba(109,131,255,.3)}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
+.btn-ghost:hover{border-color:var(--border-hover);background:var(--bg3)}
+.scroll-hint{margin-top:60px;color:var(--text3);font-size:13px;display:flex;align-items:center;gap:8px}
+.scroll-hint::before{content:'';display:block;width:1px;height:32px;background:var(--text3)}
+
+/* ── SECTIONS ── */
+section{padding:100px 0;position:relative;z-index:1}
+section h2{font-size:clamp(28px,4vw,38px);font-weight:700;letter-spacing:-1px;margin-bottom:12px}
+.section-label{font-size:13px;color:var(--accent);font-weight:500;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
+.section-sub{color:var(--text2);font-size:16px;margin-bottom:48px;max-width:500px}
+
+/* ── FILTER ── */
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
+.filter-btn{padding:7px 16px;border-radius:99px;font-size:13px;font-weight:500;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;transition:.2s;font-family:inherit}
+.filter-btn:hover{border-color:var(--border-hover);color:var(--text)}
+.filter-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+
+/* ── PROJECTS ── */
+.projects-grid{display:grid;gap:20px}
+.project{padding:28px 32px;border:1px solid var(--border);border-radius:18px;background:var(--card-bg);transition:.3s;display:grid;grid-template-columns:1fr auto;gap:20px;box-shadow:var(--shadow);backdrop-filter:blur(4px)}
+.project:hover{transform:translateY(-3px);border-color:var(--border-hover);box-shadow:0 12px 40px rgba(109,131,255,.1)}
+.project.hidden{display:none}
+.project h3{font-size:20px;font-weight:600;margin-bottom:10px;color:var(--text)}
+.project p{color:var(--text2);font-size:15px;line-height:1.65;margin-bottom:16px}
+.tags{display:flex;gap:8px;flex-wrap:wrap}
+.tag{padding:4px 12px;background:rgba(109,131,255,.12);color:#8ea2ff;border-radius:99px;font-size:12px;font-weight:500}
+.project-links{display:flex;flex-direction:column;gap:8px;align-items:flex-end;padding-top:4px}
+.proj-link{padding:7px 14px;border:1px solid var(--border);border-radius:8px;color:var(--text2);font-size:13px;white-space:nowrap;transition:.2s;text-decoration:none}
+.proj-link:hover{border-color:var(--border-hover);color:var(--accent)}
+.proj-status{font-size:11px;color:#4caf8a;font-weight:500;margin-top:auto;text-align:right}
+
+/* ── SKILLS ── */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:40px}
+.skill-card{padding:24px;border:1px solid var(--border);border-radius:14px;background:var(--card-bg);transition:.2s;box-shadow:var(--shadow);backdrop-filter:blur(4px)}
+.skill-card:hover{border-color:var(--border-hover);transform:translateY(-2px)}
+.skill-icon{font-size:24px;margin-bottom:14px}
+.skill-card h4{font-size:14px;font-weight:600;color:var(--text);margin-bottom:12px}
+.skill-items{display:flex;flex-direction:column;gap:10px}
+.skill-item-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
+.skill-name{font-size:12px;color:var(--text2)}
+.skill-pct{font-size:11px;color:var(--accent);font-weight:500}
+.skill-bar{height:3px;background:var(--border);border-radius:99px;overflow:hidden}
+.skill-fill{height:100%;background:linear-gradient(90deg,var(--accent),#a78bfa);border-radius:99px;width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+
+/* ── TIMELINE ── */
+.timeline{position:relative;margin-top:48px;padding-left:32px}
+.timeline::before{content:'';position:absolute;left:8px;top:8px;bottom:8px;width:1px;background:linear-gradient(180deg,var(--accent),transparent)}
+.tl-item{position:relative;margin-bottom:36px}
+.tl-item:last-child{margin-bottom:0}
+.tl-dot{position:absolute;left:-28px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);box-shadow:0 0 10px rgba(109,131,255,.5)}
+.tl-year{font-size:12px;color:var(--accent);font-weight:600;margin-bottom:4px;letter-spacing:.05em}
+.tl-title{font-size:16px;font-weight:600;color:var(--text);margin-bottom:4px}
+.tl-desc{font-size:14px;color:var(--text2);line-height:1.6}
+
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.about-text p{color:var(--text2);font-size:16px;line-height:1.8;margin-bottom:16px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stat{padding:20px;border:1px solid var(--border);border-radius:12px;background:var(--card-bg);transition:.2s;box-shadow:var(--shadow)}
+.stat:hover{border-color:var(--border-hover)}
+.stat-num{font-size:28px;font-weight:700;color:var(--accent)}
+.stat-label{font-size:13px;color:var(--text3);margin-top:4px}
+
+/* ── CONTACT ── */
+.contact-block{padding:40px;border:1px solid var(--border);border-radius:20px;background:var(--card-bg);box-shadow:var(--shadow);backdrop-filter:blur(4px)}
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:28px}
+.contact-item{display:flex;align-items:center;gap:14px;padding:16px 20px;border:1px solid var(--border);border-radius:12px;color:var(--text);transition:.2s;text-decoration:none;position:relative}
+.contact-item:hover{border-color:var(--border-hover);background:var(--bg3);transform:translateY(-2px)}
+.contact-icon{width:36px;height:36px;border-radius:8px;background:rgba(109,131,255,.12);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.contact-info span{display:block;font-size:11px;color:var(--text3);margin-bottom:2px;text-transform:uppercase;letter-spacing:.05em}
+.contact-info p{font-size:14px;font-weight:500}
+.copy-btn{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text2);font-size:11px;padding:4px 8px;cursor:pointer;opacity:0;transition:.2s;font-family:inherit}
+.contact-item:hover .copy-btn{opacity:1}
+.copy-btn:hover{border-color:var(--border-hover);color:var(--accent)}
+.copy-btn.copied{color:#4caf8a;border-color:rgba(76,175,138,.3)}
+
+/* ── FORM ── */
+.form-section{margin-top:32px;padding-top:32px;border-top:1px solid var(--border)}
+.form-section h3{font-size:18px;font-weight:600;margin-bottom:6px}
+.form-section p{font-size:14px;color:var(--text2);margin-bottom:20px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-group.full{grid-column:1/-1}
+.form-group label{font-size:12px;color:var(--text2);font-weight:500;text-transform:uppercase;letter-spacing:.05em}
+.form-group input,.form-group textarea{padding:12px 16px;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:inherit;font-size:14px;outline:none;transition:.2s;resize:none}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--accent);background:var(--bg2)}
+.form-group input::placeholder,.form-group textarea::placeholder{color:var(--text3)}
+.form-submit{margin-top:4px;padding:13px 28px;background:var(--accent);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:500;font-family:inherit;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;gap:8px}
+.form-submit:hover{background:var(--accent2);transform:translateY(-1px);box-shadow:0 8px 24px rgba(109,131,255,.3)}
+.form-success{display:none;margin-top:16px;padding:14px 18px;background:rgba(76,175,138,.1);border:1px solid rgba(76,175,138,.2);border-radius:10px;color:#4caf8a;font-size:14px}
+
+/* ── FOOTER ── */
+footer{padding:32px 0;border-top:1px solid var(--border);text-align:center;color:var(--text3);font-size:13px;position:relative;z-index:1}
+
+/* ── MOBILE ── */
+@media(max-width:768px){
+  nav{padding:16px 20px}
+  .nav-links{gap:14px}
+  .container{padding:0 20px}
+  .about-grid,.form-grid{grid-template-columns:1fr}
+  .project{grid-template-columns:1fr}
+  .project-links{flex-direction:row;align-items:center}
+  #backTop{bottom:20px;right:20px}
+}
+</style>
+</head>
+<body>
+
+<div id="scrollProgress"></div>
+<div class="cursor-light" id="cursorLight"></div>
+<div id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+
+<div id="boot">
+  <div class="boot-line">$ initializing DM_PORTFOLIO<span class="ok">✓</span></div>
+  <div class="boot-line">$ loading modules<span class="ok">✓</span></div>
+  <div class="boot-line">$ connecting systems<span class="ok">✓</span></div>
+  <div class="boot-line">$ ready to launch<span class="ok">✓</span></div>
+  <div class="bar"><div class="fill"></div></div>
+</div>
+
+<nav>
+  <div class="nav-logo">DM</div>
+  <div class="nav-links">
+    <a href="#projects" data-i18n="nav.projects">Projects</a>
+    <a href="#skills" data-i18n="nav.skills">Skills</a>
+    <a href="#about" data-i18n="nav.about">About</a>
+    <a href="#contact" data-i18n="nav.contact">Contact</a>
+    <button class="lang-btn" id="langBtn">RU</button>
+    <button class="theme-btn" id="themeBtn" title="Toggle theme"></button>
+  </div>
+</nav>
+
+<div class="main" id="main">
+  <div class="container">
+
+    <!-- HERO -->
+    <section class="hero"><div style="position:relative;z-index:1">
+      <div>
+        <div class="hero-badge reveal"><span></span>Open to work &amp; freelance<span data-i18n="hero.badge"></span></div>
+        <h1 class="reveal reveal-delay-1">Dmitry<br><span class="accent">Migunov</span></h1>
+        <div class="type-wrap reveal reveal-delay-2"><div class="type" id="type"></div></div>
+        <p class="hero-desc reveal reveal-delay-3" data-i18n="hero.desc">I build web products and AI tools — focused on clean code, modern design, and things that actually work.</p>
+        <div class="btns reveal reveal-delay-4">
+          <a href="#projects" class="btn btn-primary" data-i18n="hero.btn1">View my work</a>
+          <a href="#contact" class="btn btn-ghost" data-i18n="hero.btn2">Get in touch</a>
+        </div>
+        <div class="scroll-hint reveal reveal-delay-4" data-i18n="hero.scroll">scroll to explore</div>
+      </div></div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="section-label reveal" data-i18n="projects.label">Work</div>
+      <h2 class="reveal" data-i18n="projects.title">Selected projects</h2>
+      <p class="section-sub reveal" data-i18n="projects.sub">Things I've built — from crypto analytics to AI assistants.</p>
+      <div class="filter-bar reveal">
+        <button class="filter-btn active" data-filter="all" data-i18n="filter.all">All</button>
+        <button class="filter-btn" data-filter="frontend">Frontend</button>
+        <button class="filter-btn" data-filter="fullstack">Fullstack</button>
+        <button class="filter-btn" data-filter="ai">AI</button>
+      </div>
+      <div class="projects-grid">
+        <div class="project reveal" data-cats="fullstack ai">
+          <div>
+            <h3>Moonist</h3>
+            <p data-i18n="p1.desc">Crypto analytics platform with AI integration. Tracks market signals, visualizes on-chain data, and surfaces insights via a conversational interface.</p>
+            <div class="tags"><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">AI API</span><span class="tag">Charts</span></div>
+          </div>
+          <div class="project-links">
+            <a href="#" class="proj-link">Demo →</a>
+            <a href="#" class="proj-link">GitHub</a>
+            <div class="proj-status">● Live</div>
+          </div>
+        </div>
+        <div class="project reveal reveal-delay-1" data-cats="frontend">
+          <div>
+            <h3>Resume Builder</h3>
+            <p data-i18n="p2.desc">Interactive CV generation platform. Users fill in their data, choose a template, and get a clean PDF-ready resume instantly — no design skills needed.</p>
+            <div class="tags"><span class="tag">HTML/CSS</span><span class="tag">JavaScript</span><span class="tag">PDF export</span></div>
+          </div>
+          <div class="project-links">
+            <a href="#" class="proj-link">Demo →</a>
+            <a href="#" class="proj-link">GitHub</a>
+            <div class="proj-status">● Live</div>
+          </div>
+        </div>
+        <div class="project reveal reveal-delay-2" data-cats="fullstack ai">
+          <div>
+            <h3>AI Assistant</h3>
+            <p data-i18n="p3.desc">Custom AI assistant with a web interface and Telegram bot integration. Supports context-aware dialogue, custom personas, and tool use via API.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">Telegram API</span><span class="tag">LLM</span><span class="tag">FastAPI</span></div>
+          </div>
+          <div class="project-links">
+            <a href="#" class="proj-link">Demo →</a>
+            <a href="#" class="proj-link">GitHub</a>
+            <div class="proj-status" style="color:#8ea2ff">● In progress</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="section-label reveal" data-i18n="skills.label">Stack</div>
+      <h2 class="reveal" data-i18n="skills.title">What I work with</h2>
+      <p class="section-sub reveal" data-i18n="skills.sub">Technologies I use and am actively learning.</p>
+      <div class="skills-grid">
+        <div class="skill-card reveal">
+          <div class="skill-icon"></div><h4>Frontend</h4>
+          <div class="skill-items">
+            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">HTML & CSS</span><span class="skill-pct">85%</span></div><div class="skill-bar"><div class="skill-fill" data-w="85"></div></div></div>
+            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">JavaScript</span><span class="skill-pct">65%</span></div><div class="skill-bar"><div class="skill-fill" data-w="65"></div></div></div>
+            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">React</span><span class="skill-pct">40%</span></div><div class="skill-bar"><div class="skill-fill" data-w="40"></div></div></div>
+          </div>
+        </div>
+        <div class="skill-card reveal reveal-delay-1">
+          <div class="skill-icon"></div><h4>Backend</h4>
+          <div class="skill-items">
+            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">Node.js</span><span class="skill-pct">45%</span></div><div class="skill-bar"><div class="skill-fill" data-w="45"></div></div></div>
+            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">Python</span><span class="skill-pct">50%</span></div><div class="skill-bar"><div class="skill-fill" data-w="50"></div></div></div>
+            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">REST APIs</span><span class="skill-pct">55%</span></div><div class="skill-bar"><div class="skill-fill" data-w="55"></div></div></div>
+          </div>
+        </div>
+        <div class="skill-card reveal reveal-delay-2">
+          <div class="skill-icon"></div><h4>AI Integration</h4>
+          <div class="skill-items">
+            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">LLM APIs</span><span class="skill-pct">60%</span></div><div class="skill-bar"><div class="skill-fill" data-w="60"></div></div></div>
+            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">Prompt Engineering</span><span class="skill-pct">70%</span></div><div class="skill-bar"><div class="skill-fill" data-w="70"></div></div></div>
+            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">Telegram Bot API</span><span class="skill-pct">55%</span></div><div class="skill-bar"><div class="skill-fill" data-w="55"></div></div></div>
+          </div>
+        </div>
+        <div class="skill-card reveal reveal-delay-3">
+          <div class="skill-icon"></div><h4>Tools</h4>
+          <div class="skill-items">
+            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">Git & GitHub</span><span class="skill-pct">70%</span></div><div class="skill-bar"><div class="skill-fill" data-w="70"></div></div></div>
+            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">VS Code</span><span class="skill-pct">80%</span></div><div class="skill-bar"><div class="skill-fill" data-w="80"></div></div></div>
+            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">Figma</span><span class="skill-pct">35%</span></div><div class="skill-bar"><div class="skill-fill" data-w="35"></div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-label reveal" data-i18n="about.label">About</div>
+      <h2 class="reveal" data-i18n="about.title">A bit about me</h2>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p data-i18n="about.p1">I'm Dmitry, a developer from Russia, currently finishing school and heading into a CS degree. I started with the basics and quickly got hooked — now I spend most of my free time building things.</p>
+          <p data-i18n="about.p2">My focus right now is fullstack web development and AI tooling. I like projects where design, code, and product thinking meet.</p>
+          <p data-i18n="about.p3">Outside of code: interested in tech, startups, and how AI will reshape software development.</p>
+
+          <!-- TIMELINE -->
+          <div class="timeline reveal" style="margin-top:32px">
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-year">2018</div>
+              <div class="tl-title" data-i18n="tl1.title">First line of code</div>
+              <div class="tl-desc" data-i18n="tl1.desc">Started learning HTML & CSS, built first static pages.</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-year">2021</div>
+              <div class="tl-title" data-i18n="tl2.title">First real projects</div>
+              <div class="tl-desc" data-i18n="tl2.desc">Built portfolio, AI assistant web app, and several tools.</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-dot"></div>
+              <div class="tl-year">2026</div>
+              <div class="tl-title" data-i18n="tl3.title">University — CS degree</div>
+              <div class="tl-desc" data-i18n="tl3.desc">Starting a Computer Science program. Going deeper into algorithms, systems, and software engineering.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats reveal reveal-delay-1">
+          <div class="stat"><div class="stat-num counter" data-target="3">0</div><div class="stat-label" data-i18n="stat1">Projects built</div></div>
+          <div class="stat"><div class="stat-num counter" data-target="2018" data-duration="1500">0</div><div class="stat-label" data-i18n="stat2">Started coding</div></div>
+          <div class="stat"><div class="stat-num">∞</div><div class="stat-label" data-i18n="stat3">Things to learn</div></div>
+          <div class="stat"><div class="stat-num counter" data-target="1">0</div><div class="stat-label" data-i18n="stat4">Goal: ship good work</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-label reveal" data-i18n="contact.label">Contact</div>
+      <h2 class="reveal" data-i18n="contact.title">Let's talk</h2>
+      <div class="contact-block reveal">
+        <p style="color:var(--text2);font-size:16px" data-i18n="contact.sub">Open to freelance projects, collaboration, and interesting conversations.</p>
+        <div class="contact-grid">
+          <a href="https://t.me/HfjSuck" class="contact-item">
+            <div class="contact-icon">✈️</div>
+            <div class="contact-info"><span>Telegram</span><p>@HfjSuck</p></div>
+            <button class="copy-btn" onclick="copyText(event,'@HfjSuck')">copy</button>
+          </a>
+          <a href="mailto:migunoffdim@gmail.com" class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div class="contact-info"><span>Email</span><p>migunoffdim@gmail.com</p></div>
+            <button class="copy-btn" onclick="copyText(event,'migunoffdim@gmail.com')">copy</button>
+          </a>
+          <a href="https://github.com/ZeoMIg" class="contact-item">
+            <div class="contact-icon">⌨️</div>
+            <div class="contact-info"><span>GitHub</span><p>github.com/ZeoMIg</p></div>
+            <button class="copy-btn" onclick="copyText(event,'github.com/ZeoMIg')">copy</button>
+          </a>
+        </div>
+        <div class="form-section reveal">
+          <h3 data-i18n="form.title">Send a message</h3>
+          <p data-i18n="form.sub">Or just drop me a line directly here.</p>
+          <div class="form-grid">
+            <div class="form-group"><label data-i18n="form.name">Name</label><input type="text" id="fname" placeholder="Your name"></div>
+            <div class="form-group"><label data-i18n="form.email">Email</label><input type="email" id="femail" placeholder="your@email.com"></div>
+            <div class="form-group full"><label data-i18n="form.msg">Message</label><textarea id="fmsg" rows="4" placeholder="What's on your mind?"></textarea></div>
+          </div>
+          <button class="form-submit" onclick="submitForm()">
+            <span data-i18n="form.send">Send message</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+          <div class="form-success" id="formSuccess" data-i18n="form.success">✓ Message sent! I'll get back to you soon.</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+  <footer><div class="container">Built by Dmitry Migunov · 202</div></footer>
+</div>
+
+<script>
+// ── BOOT ──
+setTimeout(()=>{
+  const boot=document.getElementById('boot');
+  boot.classList.add('hide');
+  setTimeout(()=>{boot.style.display='none';document.getElementById('main').classList.add('show');triggerReveal();},500);
+},2000);
+
+// ── TYPING ──
+const wordsEN=['Full-stack developer.','AI tools builder.','Web product maker.'];
+const wordsRU=['Fullstack-разработчик.','Строю AI-инструменты.','Делаю веб-продукты.'];
+let wi=0,ci=0,deleting=false,currentLang='en';
+const typeEl=document.getElementById('type');
+function tick(){
+  const words=currentLang==='en'?wordsEN:wordsRU;
+  const word=words[wi%words.length];
+  if(!deleting){typeEl.textContent=word.slice(0,++ci);if(ci===word.length){deleting=true;setTimeout(tick,1800);return}}
+  else{typeEl.textContent=word.slice(0,--ci);if(ci===0){deleting=false;wi++;setTimeout(tick,400);return}}
+  setTimeout(tick,deleting?50:80);
+}
+tick();
+
+// ── CURSOR LIGHT ──
+const light=document.getElementById('cursorLight');
+document.addEventListener('mousemove',e=>{
+  light.style.left=e.clientX+'px';
+  light.style.top=e.clientY+'px';
+});
+
+// ── SCROLL PROGRESS ──
+const prog=document.getElementById('scrollProgress');
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  prog.style.width=(window.scrollY/h*100)+'%';
+  // back to top
+  document.getElementById('backTop').classList.toggle('show',window.scrollY>400);
+},{ passive:true });
+
+// ── THEME ──
+document.getElementById('themeBtn').addEventListener('click',()=>{
+  const html=document.documentElement;
+  html.setAttribute('data-theme',html.getAttribute('data-theme')==='dark'?'light':'dark');
+});
+
+// ── SCROLL REVEAL + COUNTERS + SKILL BARS ──
+function triggerReveal(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.querySelectorAll('.skill-fill').forEach(b=>b.style.width=b.dataset.w+'%');
+        e.target.querySelectorAll('.counter').forEach(c=>animCounter(c));
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+}
+
+function animCounter(el){
+  const target=+el.dataset.target;
+  const dur=+(el.dataset.duration||800);
+  const start=performance.now();
+  function step(now){
+    const t=Math.min((now-start)/dur,1);
+    const ease=1-Math.pow(1-t,3);
+    el.textContent=Math.round(ease*target)+(target===3?'+':'');
+    if(t<1)requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+// ── FILTER ──
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const f=btn.dataset.filter;
+    document.querySelectorAll('.project').forEach(p=>{
+      p.classList.toggle('hidden',f!=='all'&&!p.dataset.cats.includes(f));
+    });
+  });
+});
+
+// ── COPY BUTTON ──
+function copyText(e,text){
+  e.preventDefault();e.stopPropagation();
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn=e.target;
+    btn.textContent='✓';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='copy';btn.classList.remove('copied');},2000);
+  });
+}
+
+// ── FORM ──
+function submitForm(){
+  const name=document.getElementById('fname').value.trim();
+  const email=document.getElementById('femail').value.trim();
+  const msg=document.getElementById('fmsg').value.trim();
+  if(!name||!email||!msg){return;}
+  const s=document.getElementById('formSuccess');
+  s.style.display='block';
+  document.getElementById('fname').value='';
+  document.getElementById('femail').value='';
+  document.getElementById('fmsg').value='';
+  setTimeout(()=>s.style.display='none',4000);
+}
+
+// ── i18n ──
+const i18n={
+  en:{
+    'nav.projects':'Projects','nav.skills':'Skills','nav.about':'About','nav.contact':'Contact',
+    'hero.desc':'I build web products and AI tools — focused on clean code, modern design, and things that actually work.',
+    'hero.btn1':'View my work','hero.btn2':'Get in touch','hero.scroll':'scroll to explore',
+    'projects.label':'Work','projects.title':'Selected projects','projects.sub':'Things I\'ve built — from crypto analytics to AI assistants.',
+    'filter.all':'All',
+    'p1.desc':'Crypto analytics platform with AI integration. Tracks market signals, visualizes on-chain data, and surfaces insights via a conversational interface.',
+    'p2.desc':'Interactive CV generation platform. Users fill in their data, choose a template, and get a clean PDF-ready resume instantly.',
+    'p3.desc':'Custom AI assistant with a web interface and Telegram bot integration. Supports context-aware dialogue and tool use via API.',
+    'skills.label':'Stack','skills.title':'What I work with','skills.sub':'Technologies I use and am actively learning.',
+    'about.label':'About','about.title':'A bit about me',
+    'about.p1':'I\'m Dmitry, a developer from Russia, currently finishing school and heading into a CS degree.',
+    'about.p2':'My focus right now is fullstack web development and AI tooling.',
+    'about.p3':'Outside of code: interested in tech, startups, and how AI will reshape software development.',
+    'tl1.title':'First line of code','tl1.desc':'Started learning HTML & CSS, built first static pages.',
+    'tl2.title':'First real projects','tl2.desc':'Built portfolio, AI assistant web app, and several tools.',
+    'tl3.title':'University — CS degree','tl3.desc':'Starting a Computer Science program. Going deeper into algorithms and software engineering.',
+    'stat1':'Projects built','stat2':'Started coding','stat3':'Things to learn','stat4':'Goal: ship good work',
+    'contact.label':'Contact','contact.title':'Let\'s talk','contact.sub':'Open to freelance projects, collaboration, and interesting conversations.',
+    'form.title':'Send a message','form.sub':'Or just drop me a line directly here.',
+    'form.name':'Name','form.email':'Email','form.msg':'Message','form.send':'Send message',
+    'form.success':'✓ Message sent! I\'ll get back to you soon.'
+  },
+  ru:{
+    'nav.projects':'Проекты','nav.skills':'Навыки','nav.about':'Обо мне','nav.contact':'Контакты',
+    'hero.desc':'Строю веб-продукты и AI-инструменты — чистый код, современный дизайн, реальная польза.',
+    'hero.btn1':'Мои проекты','hero.btn2':'Написать мне','hero.scroll':'скролл вниз',
+    'projects.label':'Работы','projects.title':'Избранные проекты','projects.sub':'Что я построил — от крипто-аналитики до AI-ассистентов.',
+    'filter.all':'Все',
+    'p1.desc':'Платформа для крипто-аналитики с AI. Отслеживает рыночные сигналы и визуализирует данные.',
+    'p2.desc':'Интерактивный генератор резюме. Заполни данные, выбери шаблон — получи PDF мгновенно.',
+    'p3.desc':'Кастомный AI-ассистент с веб-интерфейсом и Telegram-ботом. Поддерживает диалог с контекстом.',
+    'skills.label':'Стек','skills.title':'С чем работаю','skills.sub':'Технологии которые использую и активно изучаю.',
+    'about.label':'Обо мне','about.title':'Немного о себе',
+    'about.p1':'Я Дмитрий, разработчик из России, заканчиваю школу и поступаю на CS.',
+    'about.p2':'Сейчас фокус на fullstack и AI-инструментах.',
+    'about.p3':'Вне кода: интересуюсь технологиями, стартапами и тем как AI меняет разработку.',
+    'tl1.title':'Первая строка кода','tl1.desc':'Начал изучать HTML и CSS, сделал первые статичные страницы.',
+    'tl2.title':'Первые реальные проекты','tl2.desc':'Портфолио, AI-ассистент, несколько утилит.',
+    'tl3.title':'Университет — CS','tl3.desc':'Поступаю на Computer Science. Алгоритмы, системы, разработка ПО.',
+    'stat1':'Проектов сделано','stat2':'Начал кодить','stat3':'Вещей изучить','stat4':'Цель: делать хорошо',
+    'contact.label':'Контакты','contact.title':'Давай общаться','contact.sub':'Открыт к фрилансу, коллаборациям и интересным разговорам.',
+    'form.title':'Написать сообщение','form.sub':'Или напиши мне напрямую здесь.',
+    'form.name':'Имя','form.email':'Email','form.msg':'Сообщение','form.send':'Отправить',
+    'form.success':'✓ Сообщение отправлено! Скоро отвечу.'
+  }
+};
+
+const langBtn=document.getElementById('langBtn');
+langBtn.addEventListener('click',()=>{
+  currentLang=currentLang==='en'?'ru':'en';
+  langBtn.textContent=currentLang==='en'?'RU':'EN';
+  applyLang();
+});
+
+function applyLang(){
+  const t=i18n[currentLang];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key=el.dataset.i18n;
+    if(t[key])el.textContent=t[key];
+  });
+}
+</script>
+</body>
+</html>
