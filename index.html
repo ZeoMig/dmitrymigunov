@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dmitry Migunov — Developer</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23080d1a'/%3E%3Ctext x='50' y='66' font-family='Arial,Helvetica,sans-serif' font-size='44' font-weight='700' fill='%236d83ff' text-anchor='middle'%3EDM%3C/text%3E%3C/svg%3E">
 <meta name="description" content="Fullstack developer building web products and AI tools. Open to freelance and work.">
 <!-- ⚠️ Замени yourname.dev на реальный домен и добавь og-image.png (1200x630) перед деплоем -->
 <meta property="og:title" content="Dmitry Migunov — Developer">
@@ -132,6 +133,13 @@ section h2{font-size:clamp(28px,4vw,38px);font-weight:700;letter-spacing:-1px;ma
 .proj-link{padding:7px 14px;border:1px solid var(--border);border-radius:8px;color:var(--text2);font-size:13px;white-space:nowrap;transition:.2s;text-decoration:none}
 .proj-link:hover{border-color:var(--border-hover);color:var(--accent)}
 .proj-status{font-size:11px;color:#4caf8a;font-weight:500;margin-top:auto;text-align:right}
+.project.collapsed{display:none}
+.project.featured{border-color:rgba(255,214,107,.22)}
+.project.featured:hover{border-color:rgba(255,214,107,.4)}
+.featured-badge{display:inline-flex;align-items:center;padding:4px 11px;border-radius:99px;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#ffd66b;background:rgba(255,214,107,.1);border:1px solid rgba(255,214,107,.25);margin-bottom:14px}
+.show-more-btn{display:block;margin:28px auto 0;padding:12px 26px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:14px;font-weight:500;font-family:inherit;cursor:pointer;transition:.2s}
+.show-more-btn:hover{border-color:var(--border-hover);color:var(--text);background:var(--bg3)}
+.show-more-btn.hide{display:none}
 
 /* ── SKILLS ── */
 .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:40px}
@@ -264,8 +272,9 @@ footer{padding:32px 0;border-top:1px solid var(--border);text-align:center;color
         <button class="filter-btn" data-filter="ai">AI</button>
       </div>
       <div class="projects-grid">
-        <div class="project reveal" data-cats="fullstack ai">
+        <div class="project featured reveal" data-cats="fullstack ai">
           <div>
+            <div class="featured-badge"><span data-i18n="badge.featured">★ Featured</span></div>
             <h3>Moonist</h3>
             <p data-i18n="p1.desc">Crypto analytics platform with AI integration. Tracks market signals, visualizes on-chain data, and surfaces insights via a conversational interface.</p>
             <div class="tags"><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">AI API</span><span class="tag">Charts</span></div>
@@ -276,7 +285,7 @@ footer{padding:32px 0;border-top:1px solid var(--border);text-align:center;color
             <div class="proj-status">● Live</div>
           </div>
         </div>
-        <div class="project reveal reveal-delay-1" data-cats="frontend">
+        <div class="project collapsed collapsible reveal reveal-delay-1" data-cats="frontend">
           <div>
             <h3>Resume Builder</h3>
             <p data-i18n="p2.desc">Interactive CV generation platform. Users fill in their data, choose a template, and get a clean PDF-ready resume instantly — no design skills needed.</p>
@@ -288,8 +297,9 @@ footer{padding:32px 0;border-top:1px solid var(--border);text-align:center;color
             <div class="proj-status">● Live</div>
           </div>
         </div>
-        <div class="project reveal reveal-delay-2" data-cats="fullstack ai">
+        <div class="project featured reveal reveal-delay-2" data-cats="fullstack ai">
           <div>
+            <div class="featured-badge"><span data-i18n="badge.featured">★ Featured</span></div>
             <h3>AI Assistant</h3>
             <p data-i18n="p3.desc">Custom AI assistant with a web interface and Telegram bot integration. Supports context-aware dialogue, custom personas, and tool use via API.</p>
             <div class="tags"><span class="tag">Python</span><span class="tag">Telegram API</span><span class="tag">LLM</span><span class="tag">FastAPI</span></div>
@@ -300,7 +310,32 @@ footer{padding:32px 0;border-top:1px solid var(--border);text-align:center;color
             <div class="proj-status" style="color:#8ea2ff">● In progress</div>
           </div>
         </div>
+        <div class="project collapsed collapsible reveal reveal-delay-3" data-cats="frontend">
+          <div>
+            <h3>MusicGlass</h3>
+            <p data-i18n="p4.desc">A glass-styled audio player — drop in any track and watch its sound come alive as smooth animated waves in real time.</p>
+            <div class="tags"><span class="tag">HTML/CSS</span><span class="tag">JavaScript</span><span class="tag">Web Audio API</span><span class="tag">Canvas</span></div>
+          </div>
+          <div class="project-links">
+            <a href="https://zeomig.github.io/MusicGlass/" target="_blank" rel="noopener" class="proj-link">Demo →</a>
+            <a href="https://github.com/ZeoMig/MusicGlass" target="_blank" rel="noopener" class="proj-link">GitHub</a>
+            <div class="proj-status">● Live</div>
+          </div>
+        </div>
+        <div class="project collapsed collapsible reveal reveal-delay-4" data-cats="frontend">
+          <div>
+            <h3>NameHub</h3>
+            <p data-i18n="p5.desc">A playful little tool — type in your patronymic and it instantly reveals your father's first name. Not exactly rocket science, just a fun weekend build.</p>
+            <div class="tags"><span class="tag">JavaScript</span><span class="tag">HTML/CSS</span><span class="tag">Just for fun</span></div>
+          </div>
+          <div class="project-links">
+            <a href="https://zeomig.github.io/namehub/" target="_blank" rel="noopener" class="proj-link">Demo →</a>
+            <a href="https://github.com/ZeoMig/namehub" target="_blank" rel="noopener" class="proj-link">GitHub</a>
+            <div class="proj-status">● Live</div>
+          </div>
+        </div>
       </div>
+      <button class="show-more-btn reveal" id="showMoreBtn" data-i18n="projects.showmore">Show all projects (5)</button>
     </section>
 
     <!-- SKILLS -->
@@ -310,35 +345,35 @@ footer{padding:32px 0;border-top:1px solid var(--border);text-align:center;color
       <p class="section-sub reveal" data-i18n="skills.sub">Technologies I use and am actively learning.</p>
       <div class="skills-grid">
         <div class="skill-card reveal">
-          <div class="skill-icon"></div><h4>Frontend</h4>
+          <h4>Frontend</h4>
           <div class="skill-items">
-            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">HTML & CSS</span><span class="skill-pct">85%</span></div><div class="skill-bar"><div class="skill-fill" data-w="85"></div></div></div>
-            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">JavaScript</span><span class="skill-pct">65%</span></div><div class="skill-bar"><div class="skill-fill" data-w="65"></div></div></div>
-            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">React</span><span class="skill-pct">40%</span></div><div class="skill-bar"><div class="skill-fill" data-w="40"></div></div></div>
+            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">HTML & CSS</span></div><div class="skill-bar"><div class="skill-fill" data-w="85"></div></div></div>
+            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">JavaScript</span></div><div class="skill-bar"><div class="skill-fill" data-w="65"></div></div></div>
+            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">React</span></div><div class="skill-bar"><div class="skill-fill" data-w="40"></div></div></div>
           </div>
         </div>
         <div class="skill-card reveal reveal-delay-1">
-          <div class="skill-icon"></div><h4>Backend</h4>
+          <h4>Backend</h4>
           <div class="skill-items">
-            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">Node.js</span><span class="skill-pct">45%</span></div><div class="skill-bar"><div class="skill-fill" data-w="45"></div></div></div>
-            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">Python</span><span class="skill-pct">50%</span></div><div class="skill-bar"><div class="skill-fill" data-w="50"></div></div></div>
-            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">REST APIs</span><span class="skill-pct">55%</span></div><div class="skill-bar"><div class="skill-fill" data-w="55"></div></div></div>
+            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">Node.js</span></div><div class="skill-bar"><div class="skill-fill" data-w="45"></div></div></div>
+            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">Python</span></div><div class="skill-bar"><div class="skill-fill" data-w="50"></div></div></div>
+            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">REST APIs</span></div><div class="skill-bar"><div class="skill-fill" data-w="55"></div></div></div>
           </div>
         </div>
         <div class="skill-card reveal reveal-delay-2">
-          <div class="skill-icon"></div><h4>AI Integration</h4>
+          <h4>AI Integration</h4>
           <div class="skill-items">
-            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">LLM APIs</span><span class="skill-pct">60%</span></div><div class="skill-bar"><div class="skill-fill" data-w="60"></div></div></div>
-            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">Prompt Engineering</span><span class="skill-pct">70%</span></div><div class="skill-bar"><div class="skill-fill" data-w="70"></div></div></div>
-            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">Telegram Bot API</span><span class="skill-pct">55%</span></div><div class="skill-bar"><div class="skill-fill" data-w="55"></div></div></div>
+            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">LLM APIs</span></div><div class="skill-bar"><div class="skill-fill" data-w="60"></div></div></div>
+            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">Prompt Engineering</span></div><div class="skill-bar"><div class="skill-fill" data-w="70"></div></div></div>
+            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">Telegram Bot API</span></div><div class="skill-bar"><div class="skill-fill" data-w="55"></div></div></div>
           </div>
         </div>
         <div class="skill-card reveal reveal-delay-3">
-          <div class="skill-icon"></div><h4>Tools</h4>
+          <h4>Tools</h4>
           <div class="skill-items">
-            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">Git & GitHub</span><span class="skill-pct">70%</span></div><div class="skill-bar"><div class="skill-fill" data-w="70"></div></div></div>
-            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">VS Code</span><span class="skill-pct">80%</span></div><div class="skill-bar"><div class="skill-fill" data-w="80"></div></div></div>
-            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">Figma</span><span class="skill-pct">35%</span></div><div class="skill-bar"><div class="skill-fill" data-w="35"></div></div></div>
+            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">Git & GitHub</span></div><div class="skill-bar"><div class="skill-fill" data-w="70"></div></div></div>
+            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">VS Code</span></div><div class="skill-bar"><div class="skill-fill" data-w="80"></div></div></div>
+            <div class="skill-item"><div class="skill-item-top"><span class="skill-name">Figma</span></div><div class="skill-bar"><div class="skill-fill" data-w="35"></div></div></div>
           </div>
         </div>
       </div>
@@ -378,7 +413,7 @@ footer{padding:32px 0;border-top:1px solid var(--border);text-align:center;color
         </div>
 
         <div class="stats reveal reveal-delay-1">
-          <div class="stat"><div class="stat-num counter" data-target="3">0</div><div class="stat-label" data-i18n="stat1">Projects built</div></div>
+          <div class="stat"><div class="stat-num counter" data-target="5">0</div><div class="stat-label" data-i18n="stat1">Projects built</div></div>
           <div class="stat"><div class="stat-num counter" data-target="2018" data-duration="1500">0</div><div class="stat-label" data-i18n="stat2">Started coding</div></div>
           <div class="stat"><div class="stat-num">∞</div><div class="stat-label" data-i18n="stat3">Things to learn</div></div>
           <div class="stat"><div class="stat-num counter" data-target="1">0</div><div class="stat-label" data-i18n="stat4">Goal: ship good work</div></div>
@@ -508,7 +543,7 @@ function animCounter(el){
   function step(now){
     const t=Math.min((now-start)/dur,1);
     const ease=1-Math.pow(1-t,3);
-    el.textContent=Math.round(ease*target)+(target===3?'+':'');
+    el.textContent=Math.round(ease*target)+(target===5?'+':'');
     if(t<1)requestAnimationFrame(step);
   }
   requestAnimationFrame(step);
@@ -520,11 +555,40 @@ document.querySelectorAll('.filter-btn').forEach(btn=>{
     document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
     const f=btn.dataset.filter;
+    if(f!=='all'&&showMoreBtn&&!projectsExpanded){
+      projectsExpanded=true;
+      extraProjects.forEach(p=>{p.classList.remove('collapsed');p.classList.add('visible')});
+      showMoreBtn.dataset.i18n='projects.showless';
+      applyLang();
+    }
     document.querySelectorAll('.project').forEach(p=>{
       p.classList.toggle('hidden',f!=='all'&&!p.dataset.cats.includes(f));
     });
   });
 });
+
+// ── SHOW MORE / LESS PROJECTS ──
+const showMoreBtn=document.getElementById('showMoreBtn');
+const extraProjects=document.querySelectorAll('.project.collapsible');
+let projectsExpanded=false;
+if(showMoreBtn){
+  showMoreBtn.addEventListener('click',()=>{
+    projectsExpanded=!projectsExpanded;
+    extraProjects.forEach(p=>{
+      if(projectsExpanded){
+        p.classList.remove('collapsed');
+        requestAnimationFrame(()=>p.classList.add('visible'));
+      } else {
+        p.classList.add('collapsed');
+      }
+    });
+    showMoreBtn.dataset.i18n = projectsExpanded ? 'projects.showless' : 'projects.showmore';
+    applyLang();
+    if(!projectsExpanded){
+      document.getElementById('projects').scrollIntoView({behavior:'smooth',block:'start'});
+    }
+  });
+}
 
 // ── COPY BUTTON ──
 function copyText(e,text){
@@ -600,9 +664,14 @@ const i18n={
     'hero.btn1':'View my work','hero.btn2':'Get in touch','hero.scroll':'scroll to explore',
     'projects.label':'Work','projects.title':'Selected projects','projects.sub':'Things I\'ve built — from crypto analytics to AI assistants.',
     'filter.all':'All',
+    'badge.featured':'★ Featured',
+    'projects.showmore':'Show all projects (5)',
+    'projects.showless':'Show less',
     'p1.desc':'Crypto analytics platform with AI integration. Tracks market signals, visualizes on-chain data, and surfaces insights via a conversational interface.',
     'p2.desc':'Interactive CV generation platform. Users fill in their data, choose a template, and get a clean PDF-ready resume instantly.',
     'p3.desc':'Custom AI assistant with a web interface and Telegram bot integration. Supports context-aware dialogue and tool use via API.',
+    'p4.desc':'A glass-styled audio player — drop in any track and watch its sound come alive as smooth animated waves in real time.',
+    'p5.desc':'A playful little tool — type in your patronymic and it instantly reveals your father\'s first name. Not exactly rocket science, just a fun weekend build.',
     'skills.label':'Stack','skills.title':'What I work with','skills.sub':'Technologies I use and am actively learning.',
     'about.label':'About','about.title':'A bit about me',
     'about.p1':'I\'m Dmitry, a developer from Russia, currently finishing school and heading into a CS degree.',
@@ -623,9 +692,14 @@ const i18n={
     'hero.btn1':'Мои проекты','hero.btn2':'Написать мне','hero.scroll':'скролл вниз',
     'projects.label':'Работы','projects.title':'Избранные проекты','projects.sub':'Что я построил — от крипто-аналитики до AI-ассистентов.',
     'filter.all':'Все',
+    'badge.featured':'★ Топ',
+    'projects.showmore':'Показать все проекты (5)',
+    'projects.showless':'Свернуть',
     'p1.desc':'Платформа для крипто-аналитики с AI. Отслеживает рыночные сигналы и визуализирует данные.',
     'p2.desc':'Интерактивный генератор резюме. Заполни данные, выбери шаблон — получи PDF мгновенно.',
     'p3.desc':'Кастомный AI-ассистент с веб-интерфейсом и Telegram-ботом. Поддерживает диалог с контекстом.',
+    'p4.desc':'Аудиоплеер в стиле стекла — закидываешь трек, и звук оживает плавными анимированными волнами в реальном времени.',
+    'p5.desc':'Небольшая штука для развлечения — вводишь своё отчество и сразу узнаёшь имя отца. Не ракетостроение, просто фан-проект на выходные.',
     'skills.label':'Стек','skills.title':'С чем работаю','skills.sub':'Технологии которые использую и активно изучаю.',
     'about.label':'Обо мне','about.title':'Немного о себе',
     'about.p1':'Я Дмитрий, разработчик из России, заканчиваю школу и поступаю на CS.',
@@ -651,6 +725,7 @@ langBtn.addEventListener('click',()=>{
 
 function applyLang(){
   const t=i18n[currentLang];
+  document.documentElement.lang=currentLang;
   document.querySelectorAll('[data-i18n]').forEach(el=>{
     const key=el.dataset.i18n;
     if(t[key])el.textContent=t[key];
